@@ -25,23 +25,23 @@ public class MainActivity extends AppCompatActivity {
     {
         One,
         Two,
-        Three
+        Three,
     }
 
     private enum IntentStyle
     {
         Implicit,
-        Explicit
+        Explicit,
     }
 
     private Step step = Step.Three;
     private IntentStyle intent = IntentStyle.Implicit;
-
     ///////////////////////////
 
     private final String TAG = "First Demo";
     public static String MESSAGE = "Message";
     public static int MESSAGE_RECEIVED = 1;
+    private Integer HomePageCount = 0;
 
     private ActivityMainBinding binding;
 
@@ -86,6 +86,15 @@ public class MainActivity extends AppCompatActivity {
                     triggerButtonPressWithIntent();
                 }
             });
+            binding.button3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    binding.receivedMessage.setText("Button has been clicked from ViewBinding!");
+                    Log.d(TAG, "onCreate: Step Three: Click View Binding Button!");
+                    intent = IntentStyle.Explicit;
+                    triggerButtonPressWithIntent();
+                }
+            });
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -105,9 +114,9 @@ public class MainActivity extends AppCompatActivity {
          */
         if (intent == IntentStyle.Implicit) {
             //Explicit Intents
-            Log.d(TAG, "outputLog: Step one: Explicit Intent");
-            Intent intent = new Intent(this, Main2Activity.class);
-            intent.putExtra(MESSAGE, "Hello from the first activity");
+            Intent intent = new Intent();
+            intent.setAction("SecondActivity");
+            intent.putExtra(MESSAGE, "Hello from the first activity!");
             startActivityIntent.launch(intent);
         }
 
@@ -118,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
          */
         if (intent == IntentStyle.Explicit) {
             //Implicit Intents
-            Intent intent = new Intent();
-            intent.setAction("SecondActivity");
+            Log.d(TAG, "outputLog: Step one: Explicit Intent");
+            Intent intent = new Intent(this, Main3Activity.class);
             intent.putExtra(MESSAGE, "Hello from the first activity");
             startActivityIntent.launch(intent);
         }
@@ -133,7 +142,9 @@ public class MainActivity extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     //if (result.getData() == MESSAGE_RECEIVE) {
                     if (result.getResultCode()==RESULT_OK){
+                        HomePageCount++;
                         binding.receivedMessage.setText(result.getData().getStringExtra(Main2Activity.RECEIVED_MESSAGE));
+                        binding.count.setText(HomePageCount.toString());
                     }
 
                 }

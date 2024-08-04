@@ -22,15 +22,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Main2Activity"
             android:exported="true">
             <intent-filter>
-                <action android:name="SecondActivity"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="SecondActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Main3Activity"
+            android:exported="true" />
+
     </application>
 
 </manifest>
