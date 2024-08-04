@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         will satisfy the intent, by specifying a full ComponentName.
          */
         if (intent == IntentStyle.Implicit) {
-            //Explicit Intents
+            //Implicit Intents
             Intent intent = new Intent();
             intent.setAction("SecondActivity");
             intent.putExtra(MESSAGE, "Hello from the first activity!");
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         which allows a component from another app to handle it.
          */
         if (intent == IntentStyle.Explicit) {
-            //Implicit Intents
+            //Explicit Intents
             Log.d(TAG, "outputLog: Step one: Explicit Intent");
             Intent intent = new Intent(this, Main3Activity.class);
             intent.putExtra(MESSAGE, "Hello from the first activity");
