@@ -84,6 +84,16 @@ public class MainActivity extends AppCompatActivity {
                             .commit();
                     return true;
                 }
+
+                else if (id == R.id.navigation_chat) {
+                    Fragment recycler_layout = LayoutDemoFragment.newInstance(LayoutDemoFragment.CHAT_DEMO);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.layout_fragment, recycler_layout)
+                            .addToBackStack(null)
+                            .commit();
+                    return true;
+                }
                 return false;
             }
         });

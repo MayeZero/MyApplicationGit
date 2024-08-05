@@ -21,4 +21,9 @@
         android:icon="@drawable/recycler_view_demo"
         android:title="Recycler View" />
 
+    <item
+        android:id="@+id/navigation_chat"
+        android:icon="@drawable/chat"
+        android:title="chat View" />
+
 </menu>

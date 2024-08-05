@@ -22,6 +22,7 @@ public class LayoutDemoFragment extends Fragment {
     static int RELATIVE_DEMO = R.layout.fragment_layout_demo_relative;
     static int LIST_DEMO = R.layout.fragment_layout_demo_list;
     static int RECYCLER_DEMO = R.layout.fragment_layout_demo_recycler;
+    static int CHAT_DEMO = R.layout.fragment_layout_demo_chat;
     static String LAYOUT_TYPE = "type";
 
     private int layout = R.layout.fragment_layout_demo_linear;
@@ -61,6 +62,23 @@ public class LayoutDemoFragment extends Fragment {
             recyclerBinding.demoRecycler.setAdapter(adapter);
 
             return recyclerBinding.getRoot();
+        }
+        else if (this.layout == R.layout.fragment_layout_demo_chat) {
+            listBinding = FragmentLayoutDemoListBinding.inflate(inflater, container, false);
+
+            ListPlusAdapter adapter = new ListPlusAdapter(getActivity(), R.layout.list_example, getFruitsPlus());
+            listBinding.demoListView.setAdapter(adapter);
+
+            // To set onItemClickListener - method 1
+            listBinding.demoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    FruitPlus fruitplus = (FruitPlus)adapterView.getItemAtPosition(i);
+                    Toast.makeText(getContext(), fruitplus.getFruitName(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            return listBinding.getRoot();
         }
         else {
             View view = inflater.inflate(layout, container, false);
@@ -104,6 +122,24 @@ public class LayoutDemoFragment extends Fragment {
         fruits.add(new Fruit(R.drawable.watermelon, "Watermelon"));
 
         return fruits;
+    }
+
+    private ArrayList<FruitPlus> getFruitsPlus() {
+        ArrayList<FruitPlus> fruitsplus = new ArrayList<>();
+        fruitsplus.add(new FruitPlus(R.drawable.apple, "Apple", 3.2));
+        fruitsplus.add(new FruitPlus(R.drawable.bananas, "Bananas", 5.6));
+        fruitsplus.add(new FruitPlus(R.drawable.cherry, "Cherry", 6.3));
+        fruitsplus.add(new FruitPlus(R.drawable.grapes, "Grapes", 7.8));
+        fruitsplus.add(new FruitPlus(R.drawable.lemon, "Lemon", 9.6));
+        fruitsplus.add(new FruitPlus(R.drawable.orange, "Orange", 4.1));
+        fruitsplus.add(new FruitPlus(R.drawable.melon, "Melon", 5.4));
+        fruitsplus.add(new FruitPlus(R.drawable.peach, "Peach", 2.7));
+        fruitsplus.add(new FruitPlus(R.drawable.pear, "Pear", 8.5));
+        fruitsplus.add(new FruitPlus(R.drawable.pomegranate, "Pomegranate", 4.2));
+        fruitsplus.add(new FruitPlus(R.drawable.strawberry, "Strawberry",12.3));
+        fruitsplus.add(new FruitPlus(R.drawable.watermelon, "Watermelon", 6.6));
+        fruitsplus.add(new FruitPlus(R.drawable.coconut, "Coconut", 6.4));
+        return fruitsplus;
     }
 
 }
